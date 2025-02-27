@@ -52,5 +52,12 @@ namespace TEDDY.Database
         public Task<int> AddToCartAsync(ShoppingCart cartItem) => _database.InsertAsync(cartItem);
         public Task<List<ShoppingCart>> GetShoppingCartItemsAsync() => _database.Table<ShoppingCart>().ToListAsync();
         public Task<int> RemoveFromCartAsync(ShoppingCart cartItem) => _database.DeleteAsync(cartItem);
+
+        // Get ShoppingItem by its ID
+        public Task<ShoppingItem> GetShoppingItemByIdAsync(int itemId)
+        {
+            return _database.Table<ShoppingItem>().Where(i => i.Id == itemId).FirstOrDefaultAsync();
+        }
+
     }
 }

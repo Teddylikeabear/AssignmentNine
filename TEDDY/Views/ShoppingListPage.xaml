@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:TEDDY.Views"
              x:Class="TEDDY.Views.ShoppingListPage"
-             Title="ShoppingListPage">
+             Title="Shopping List">
 
-    <StackLayout Padding="20">
-        <!-- ListView with x:Name for binding -->
-        <ListView x:Name="shoppingListView">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="{Binding Name}" />
-                            <Button Text="Add to Cart" Clicked="OnAddToCartClicked"/>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
+    <!-- Wrapping the entire layout inside a ScrollView -->
+    <ScrollView Padding="10">
+        <StackLayout>
+            <Label Text="Available Items" FontSize="24" HorizontalOptions="Center" />
 
+            <!-- CollectionView to display shopping items -->
+            <CollectionView x:Name="ShoppingItemsCollectionView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" Margin="5" BorderColor="Gray">
+                            <StackLayout>
+                                <Label Text="{Binding Name}" FontSize="18" />
+                                <Label Text="{Binding Price, StringFormat='Price: R{0}'}" FontSize="14" />
+                                <Label Text="{Binding Stock, StringFormat='Stock: {0}'}" FontSize="14" />
+
+                                <!-- Button to add item to the cart -->
+                                <Button Text="Add to Cart"
+                                        Clicked="OnAddToCartClicked"
+                                        CommandParameter="{Binding .}" />
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- View Cart button moved below the list -->
+            <Button Text="Go to Cart" Clicked="OnGoToCartClicked" />
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

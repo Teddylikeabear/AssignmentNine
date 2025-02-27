@@ -33,6 +33,15 @@
                     CornerRadius="10"
                     HeightRequest="50"
                     Clicked="SaveButton_Clicked" />
+            
+            <Button Text="Go to Shopping List"
+        FontSize="18"
+        BackgroundColor="#007bff"
+        TextColor="#ffffff"
+        CornerRadius="10"
+        HeightRequest="50"
+        Clicked="GoToShoppingListButton_Clicked" />
+
         </VerticalStackLayout>
     </ScrollView>
 

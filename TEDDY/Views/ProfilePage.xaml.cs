@@ -65,5 +65,11 @@ namespace TEDDY.Views
             await _database.SaveProfileAsync(profile);
             await DisplayAlert("Success", "Profile saved!", "OK");
         }
+
+        private async void GoToShoppingListButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ShoppingListPage());
+        }
+
     }
 }

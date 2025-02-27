@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:TEDDY.Views"
+             x:Class="TEDDY.Views.ShoppingCartPage"
+             Title="Shopping Cart">
+
+    <!-- Wrapping the entire layout in a ScrollView to make it scrollable -->
+    <ScrollView Padding="10">
+        <StackLayout>
+            <!-- Display the user profile name -->
+            <Label x:Name="UserNameLabel" FontSize="24" HorizontalOptions="Center" />
+
+            <!-- Button to navigate back to the shopping list -->
+            <Button Text="Back to Shopping List" Clicked="OnBackToShoppingListClicked" />
+
+            <!-- Label showing the cart title -->
+            <Label Text="Your Cart" FontSize="24" HorizontalOptions="Center" />
+
+            <!-- CollectionView to display items in the shopping cart -->
+            <CollectionView x:Name="CartItemsCollectionView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" Margin="5" BorderColor="Gray">
+                            <StackLayout>
+                                <!-- Display Cart Item Name -->
+                                <Label Text="{Binding Item.Name}" FontSize="18" />
+                                <!-- Display Cart Item Quantity -->
+                                <Label Text="{Binding Quantity, StringFormat='Quantity: {0}'}" FontSize="14" />
+                                <!-- Display Cart Item Price -->
+                                <Label Text="{Binding Item.Price, StringFormat='Price: R{0}'}" FontSize="14" />
+
+                                <VerticalStackLayout Spacing="10">
+                                    <!-- Button to increase quantity -->
+                                    <Button Text="Add One More"
+                                            Clicked="OnAddOneMoreClicked"
+                                            CommandParameter="{Binding .}"
+                                            Margin="0,0,0,0"/>
+
+                                    <!-- Button to remove item from cart -->
+                                    <Button Text="Remove from Cart"
+                                            Clicked="OnRemoveFromCartClicked"
+                                            CommandParameter="{Binding .}" />
+                                </VerticalStackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Label showing the total amount -->
+            <Label x:Name="TotalLabel" FontSize="18" HorizontalOptions="Center" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
